@@ -12,10 +12,8 @@ import CostsIndex from './containers/costs_index';
 import '../assets/stylesheets/application.scss';
 import costsReducer from './reducers/costs_reducer';
 
-import CostsIndex from './containers/costs_index';
-
 const reducers = combineReducers({
-  costs: (state = [], action) => //implement postsReducer
+  costs: (state = [], action) => state //implement costsReducer
 });
 
 const middlewares = applyMiddleware(reduxPromise, logger);
@@ -26,10 +24,10 @@ ReactDOM.render(
     <Router history={history}>
       <div className="thin-container">
         <Switch>
-          <Route path="/" exact component={ CostsIndex } />
+          <Route path="/" exact component={CostsIndex} />
         </Switch>
       </div>
     </Router>
   </Provider>,
-  document.getElementById('root');
+  document.getElementById('root')
 );
