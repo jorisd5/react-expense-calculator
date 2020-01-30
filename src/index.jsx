@@ -13,7 +13,7 @@ import '../assets/stylesheets/application.scss';
 import costsReducer from './reducers/costs_reducer';
 
 const reducers = combineReducers({
-  costs: (state = [], action) => state //implement costsReducer
+  costs: costsReducer
 });
 
 const middlewares = applyMiddleware(reduxPromise, logger);

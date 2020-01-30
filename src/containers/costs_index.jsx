@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { fetchCosts } from '../actions';
+
+const getCurrentMonth = () => {
+  const currentDate = Date.now();
+  const options = { month: 'long' };
+  return new Intl.DateTimeFormat('en-US', options).format(currentDate);
+};
+
 class CostsIndex extends Component {
+  componentWillMount() {
+    this.props.fetchCosts();
+  }
+
   renderCosts() {
+    console.log(this.props.costs);
     return this.props.costs.map((cost) => {
       return (
         <Link to={`/costs/${cost.id}`} key={cost.id}>
           <div className="cost-item">
-            <h3>{cost.title}</h3>
-            <p>{cost.content}</p>
+            <h3>{cost.description}</h3>
+            <p>Total this month: {cost.amount} €</p>
           </div>
         </Link>
       );
@@ -20,9 +34,10 @@ class CostsIndex extends Component {
     return (
       <div>
         <div className="first-row">
-          <h3>Blog</h3>
+          <h3>Costs</h3>
+          <h2>{getCurrentMonth()}</h2>
           <Link className="btn-expense" to="/costs/new">
-            Let&apos;s add an expense.
+            <span>Let&apos;s add an expense.</span>
           </Link>
         </div>
         {this.renderCosts()}
@@ -37,4 +52,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CostsIndex);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchCosts }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CostsIndex);
