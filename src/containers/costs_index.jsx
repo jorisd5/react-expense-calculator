@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { fetchCosts } from '../actions';
+import { fetchMonthsCosts } from '../actions';
 
 const getCurrentMonth = () => {
   const currentDate = Date.now();
@@ -14,6 +15,7 @@ const getCurrentMonth = () => {
 class CostsIndex extends Component {
   componentWillMount() {
     this.props.fetchCosts();
+    this.props.fetchMonthsCosts();
   }
 
   renderCosts() {
@@ -48,12 +50,14 @@ class CostsIndex extends Component {
 
 function mapStateToProps(state) {
   return {
-    costs: state.costs
+    costs: state.costs,
+    monthsCosts: state.monthsCosts
   };
+  console.log(costs);
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchCosts }, dispatch);
+  return bindActionCreators({ fetchCosts, fetchMonthsCosts }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CostsIndex);

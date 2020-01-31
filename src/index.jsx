@@ -11,9 +11,11 @@ import CostsIndex from './containers/costs_index';
 
 import '../assets/stylesheets/application.scss';
 import costsReducer from './reducers/costs_reducer';
+import monhtsCostsReducer from './reducers/months_costs_reducer';
 
 const reducers = combineReducers({
-  costs: costsReducer
+  costs: costsReducer,
+  monthsCosts: monhtsCostsReducer
 });
 
 const middlewares = applyMiddleware(reduxPromise, logger);
