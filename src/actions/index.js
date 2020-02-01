@@ -1,7 +1,8 @@
 export const FETCH_COSTS = 'FETCH_COSTS';
 export const GET_MONTHS_COSTS = 'GET_MONTHS_COSTS';
 
-// AJAX request to get costs
+const today = new Date();
+const currentMonth = today.getMonth() + 1;
 
 export function fetchCosts() {
   // AJAX request
@@ -13,33 +14,8 @@ export function fetchCosts() {
   };
 }
 
-export function fetchMonthsCosts() {
-  // const currentDate = new Date();
-  // console.log(promise);
-  // let monthsCosts = [];
-
-  // // const filterCurrentMonth = (cost) => {
-  // //   const createdAtDate = new Date(cost.createdAt);
-  // //   if (createdAtDate.getMonth() === currentDate.getMonth()) {
-  // //     monthsCosts.push(cost);
-  // //   }
-  // // };
-
-  // monthsCosts = promise.map((cost) => {
-  //   return cost.createdAtDate.getMonth() === currentDate.getMonth();
-  // });
-
-  // // for (const cost of promise) {
-  // //   filterCurrentMonth(cost);
-  // // }
-
-  // console.log(monthsCosts);
-
-  // return {
-  //   type: GET_MONTHS_COSTS,
-  //   payload: monthsCosts
-  // };
-const promise = fetch("http://localhost:3000/costs/").then(response => response.json()); //remove duplicate
+export function fetchMonthsCosts(month = currentMonth) {
+  const promise = fetch(`http://localhost:3000/costs/month/${month}`).then(response => response.json());
   return {
     type: GET_MONTHS_COSTS,
     payload: promise
