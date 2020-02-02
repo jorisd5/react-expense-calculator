@@ -4,14 +4,16 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import reduxPromise from 'redux-promise';
 import logger from 'redux-logger';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { createHistory as history } from 'history';
+import { Router, Route, Redirect, Switch } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
-import CostsIndex from './containers/costs_index';
+import App from './components/app';
 
 import '../assets/stylesheets/application.scss';
 import costsReducer from './reducers/costs_reducer';
 import monhtsCostsReducer from './reducers/months_costs_reducer';
+
+const history = createBrowserHistory();
 
 const reducers = combineReducers({
   costs: costsReducer,
@@ -26,7 +28,8 @@ ReactDOM.render(
     <Router history={history}>
       <div className="thin-container">
         <Switch>
-          <Route path="/" exact component={CostsIndex} />
+          <Route path="/:monthsCosts" component={App} />
+          <Redirect from="/" to="/costs" />
         </Switch>
       </div>
     </Router>

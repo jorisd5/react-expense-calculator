@@ -14,11 +14,11 @@ const getCurrentMonth = () => {
 
 class CostsIndex extends Component {
   componentWillMount() {
-    this.props.fetchCosts();
+    // this.props.fetchCosts();
     this.props.fetchMonthsCosts();
   }
 
-  renderCosts() {
+  renderCosts = (monthsCosts = 2) => {
     return this.props.monthsCosts.map((cost) => {
       return (
         <Link to={`/costs/${cost.id}`} key={cost.id}>
@@ -37,9 +37,12 @@ class CostsIndex extends Component {
         <div className="first-row">
           <h3>Costs</h3>
           <Link to="/costs/new">
-            <i class="fas fa-arrow-left" />
+            <i className="fas fa-arrow-left" />
           </Link>
           <h2>{getCurrentMonth()}</h2>
+          <Link to="/costs/new">
+            <i className="fas fa-arrow-right" />
+          </Link>
           <Link className="btn-expense" to="/costs/new">
             <span>Let&apos;s add an expense.</span>
           </Link>
