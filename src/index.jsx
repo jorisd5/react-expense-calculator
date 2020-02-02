@@ -28,8 +28,7 @@ ReactDOM.render(
     <Router history={history}>
       <div className="thin-container">
         <Switch>
-          <Route path="/:monthsCosts" component={App} />
-          <Redirect from="/" to="/costs" />
+          <Route path="/costs/:monthsCosts?" component={App} />
         </Switch>
       </div>
     </Router>

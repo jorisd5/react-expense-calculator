@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { fetchCosts } from '../actions';
 import { fetchMonthsCosts } from '../actions';
 
+// const can only be used in ts file ? (when placing in class)
 const getCurrentMonth = () => {
   const currentDate = Date.now();
   const options = { month: 'long' };
@@ -15,10 +16,12 @@ const getCurrentMonth = () => {
 class CostsIndex extends Component {
   componentWillMount() {
     // this.props.fetchCosts();
-    this.props.fetchMonthsCosts();
+    this.props.fetchMonthsCosts(this.props.monthsCostsFromUrl);
+    console.log(this.props.monthsCostsFromUrl);
   }
 
-  renderCosts = (monthsCosts = 2) => {
+  renderCosts = (monthsCosts) => {
+    console.log(monthsCosts);
     return this.props.monthsCosts.map((cost) => {
       return (
         <Link to={`/costs/${cost.id}`} key={cost.id}>
@@ -53,12 +56,12 @@ class CostsIndex extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, ownProps) {
   return {
     costs: state.costs,
-    monthsCosts: state.monthsCosts
+    monthsCosts: state.monthsCosts,
+    monthsCostsFromUrl: parseInt(ownProps.match.params.id, 10),
   };
-  console.log(costs);
 }
 
 function mapDispatchToProps(dispatch) {
