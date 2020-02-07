@@ -6,7 +6,7 @@ const App = (props) => {
   console.log('App reached!');
   return (
     <div className="app-container">
-      <CostsIndex monthsCostsFromParams={props.match.params.monthsCosts} />
+      <CostsIndex monthsCostsFromParams={props.match.params.id} />
     </div>
   );
 };

@@ -28,7 +28,7 @@ ReactDOM.render(
     <Router history={history}>
       <div className="thin-container">
         <Switch>
-          <Route path="/costs/:monthsCosts?" component={App} />
+          <Route path="/costs/:id" component={App} />
         </Switch>
       </div>
     </Router>
